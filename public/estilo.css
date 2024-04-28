@@ -1,0 +1,126 @@
+
+
+
+body{
+    margin: 0px;
+    padding: 0px;  
+    font-family:Arial, Helvetica, sans-serif ;
+}
+
+.menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-left: 2%;
+    padding-right: 5%; 
+    font-weight: bold; 
+    background-color:#0d436b ;
+}
+
+.opciones li{
+    display: inline-block;
+    padding: 0px 25px;
+}
+
+.opciones li a{
+    color: #f5f6f7;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+header h1{
+    margin: 0;
+    color: #f5f6f7;
+    font-size: 45px;
+    padding-right: 50px;
+}
+
+h2{
+    margin: 0px;
+    padding: 0px 40px 0px 20px;
+    color: #f5f6f7;
+}
+
+.Formulario{
+    padding: 45px 30px; 
+}
+
+/* button{
+    margin: 0px 50px;
+} */
+
+#Inicio{
+    text-align: center;
+    padding: 20px 0px;
+    margin: 100px 300px;
+    background-color: #202b75d4;
+}
+
+#map {
+    margin: 0 auto; 
+    display: block;
+    border-radius: 10%;
+    width: 90%;
+    height: 400px;
+}
+
+.contenedor{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.formularioB{
+    width: 25%;
+    float: left;
+}
+.formularioB button{
+    display: flex;
+    background-color:  #0d436b;
+    margin: 20px;
+    padding: 25px 35px; 
+    border-radius: 25px;
+
+    
+}
+
+.formularioB button a{
+    color: #f5f6f7;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.lavadoraG{
+    display: flex;
+    width: 300px;
+    float: right;
+}
+
+.bg-TEC{
+    background-color: #0d436b !important;
+    font-family:Arial, Helvetica, sans-serif ;
+} 
+
+.nav-link {
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    color: #f5f6f7;
+    text-decoration: none;
+    background: 0 0;
+    border: 0;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    font-size: 20px;
+}
+
+.dummy img{
+    display: flex;
+    height: 400px;
+}
+
+.mover-derecha {
+    margin-left: auto;
+    display: block;
+}
