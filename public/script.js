@@ -224,7 +224,7 @@ if (idReporte) {
         var currentValue = document.getElementById(field).textContent;
         var newValue = currentValue == '0' ? '1' : '0';
 
-        const response = await fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes/' + idReporte {
+        const response = await fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes/', + idReporte, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
