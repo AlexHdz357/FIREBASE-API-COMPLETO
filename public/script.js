@@ -171,13 +171,14 @@ if (window.location.pathname === '/reportes.html') {
 
 }
 
-// Obtener el ID del reporte de la URL
+
+
+// Verificar si el ID del reporte está presente
+if (window.location.pathname === '/VistaReporte.html') {
+  // Obtener el ID del reporte de la URL
 let urlParams = new URLSearchParams(window.location.search);
 let id = urlParams.get('id');
 console.log(id + "Estas vivo id? parte 1") 
-
-// Verificar si el ID del reporte está presente
-if (id) {
   console.log(id + "Estas vivo id? parte 2")
   document.addEventListener('DOMContentLoaded', (event) => {
     // Hacer una solicitud GET a la API para obtener la información del reporte
