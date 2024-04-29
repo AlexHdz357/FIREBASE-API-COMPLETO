@@ -40,7 +40,7 @@ router.post("/api/reportes", async (req, res) => {
     return res.status(500).send(error);
   }
 });  
-router.get("/api/reportes/:idReporte", async (req, res) => {
+router.get("/api/reportes/:id", async (req, res) => {
     (async () => {
       try {
         const doc = db.collection("reportes").doc(req.params.id);
