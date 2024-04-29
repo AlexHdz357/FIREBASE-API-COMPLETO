@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const corsOptions = {
   origin: "https://fb-api-1fbee.web.app",
-  optionSuccessStatus: 200
+  optionsSuccessStatus: 200
 };
 
 router.use(cors(corsOptions));

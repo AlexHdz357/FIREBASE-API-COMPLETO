@@ -86,17 +86,17 @@ if (formulario) {
     const data = { idEmpleado, nombreProducto, prioridad, descripcion, latitude, longitude, aprobado, imagenTexto, completado};
     console.log('Sending data:', data);
     
-    const response = await fetch('https://us-central1-tu-proyecto.cloudfunctions.net/api/reportes', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(data),
-});
+    const response = await fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
-if (!response.ok) {
-  throw new Error('Error al enviar el reporte');
-}
+    if (!response.ok) {
+      throw new Error('Error al enviar el reporte');
+    }
 
 if (response.status !== 204) {
   const data = await response.json();
