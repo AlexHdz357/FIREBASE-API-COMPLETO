@@ -225,7 +225,7 @@ if (idReporte) {
         var newValue = currentValue == '0' ? '1' : '0';
 
         const response = await fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes/', + idReporte, {
-          method: 'POST',
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },
