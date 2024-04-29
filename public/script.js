@@ -86,7 +86,7 @@ if (formulario) {
     const data = { idEmpleado, nombreProducto, prioridad, Descripcion, latitude, longitude, aprobado, imagenTexto, completado};
     console.log('Sending data:', data);
     
-    const response = await fetch('http://localhost:3000/reportes', {
+    const response = await fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ if (formulario) {
 // Verificar si estamos en la página correcta
 if (window.location.pathname === '/reportes.html') {
   // Obtener y mostrar todos los reportes
-  fetch('http://localhost:3000/reportes')
+  fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes')
   .then(response => response.json())
   .then(reportes => {
       // Crear la tabla y agregarle las clases de Bootstrap
@@ -178,7 +178,7 @@ let idReporte = urlParams.get('idReporte');
 if (idReporte) {
   document.addEventListener('DOMContentLoaded', (event) => {
     // Hacer una solicitud GET a la API para obtener la información del reporte
-    fetch('http://localhost:3000/reportes/' + idReporte)
+    fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes/' + idReporte)
     .then(response => response.json())
     .then(reporte => {
       // Mostrar la información del reporte en la página
@@ -224,7 +224,7 @@ if (idReporte) {
         var currentValue = document.getElementById(field).textContent;
         var newValue = currentValue == '0' ? '1' : '0';
 
-        const response = await fetch('http://localhost:3000/reportes/' + idReporte + '/updateField', {
+        const response = await fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes/' + idReporte {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
