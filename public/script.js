@@ -227,7 +227,7 @@ if (id) {
         var currentValue = document.getElementById(field).textContent;
         var newValue = currentValue == '0' ? '1' : '0';
 
-        const response = await fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes/', + idReporte, {
+        const response = await fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes/' + id ,{
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -251,12 +251,12 @@ if (id) {
 }
   
 // Verificar si estamos en la página correcta
-if (window.location.pathname === '/listaEmpleados.html') {
+if (window.location.pathname === '/listaEmpleados.html' || 'listaEmpleados2.html') {
   // Verificar si el elemento donde deseas insertar la tabla existe
   const empleadosTable = document.getElementById('empleados-table');
   if (empleadosTable) {
     // Hacer una solicitud GET a la API para obtener la información de los empleados
-    fetch('http://localhost:3000/empleados')
+    fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/empleados')
     .then(response => response.json())
     .then(empleados => {
       // Crear una tabla
@@ -266,7 +266,7 @@ if (window.location.pathname === '/listaEmpleados.html') {
       // Crear el encabezado de la tabla
       let thead = document.createElement('thead');
       let tr = document.createElement('tr');
-      ['ID', 'Nombre', 'Rol'].forEach(headerText => { // Eliminado 'Puntos'
+      ['ID', 'Nombre', 'Rol', 'Puntos', 'FechaIngreso'].forEach(headerText => { // Eliminado 'Puntos'
         let th = document.createElement('th');
         th.textContent = headerText;
         tr.appendChild(th);
@@ -278,7 +278,7 @@ if (window.location.pathname === '/listaEmpleados.html') {
       let tbody = document.createElement('tbody');
       empleados.forEach(empleado => {
         let tr = document.createElement('tr');
-        [empleado.idEmpleado, empleado.NombreCompleto, empleado.Rol].forEach(text => { // Eliminado empleado.Puntos
+        [empleado.id, empleado.nombreCompleto, empleado.Rol, empleado.Puntos, empleado.fecha].forEach(text => { // Eliminado empleado.Puntos
           let td = document.createElement('td');
           td.textContent = text;
           tr.appendChild(td);
@@ -299,7 +299,7 @@ if (window.location.pathname === '/leaderboard.html') {
   const leaderboardTable = document.getElementById('leaderboard-table');
   if (leaderboardTable) {
     // Hacer una solicitud GET a la API para obtener la información de los empleados
-    fetch('http://localhost:3000/empleados/leaderboard')
+    fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/leaderboard')
     .then(response => response.json())
     .then(empleados => {
       // Crear una tabla
@@ -309,7 +309,7 @@ if (window.location.pathname === '/leaderboard.html') {
       // Crear el encabezado de la tabla
       let thead = document.createElement('thead');
       let tr = document.createElement('tr');
-      ['Nombre', 'Puntos'].forEach(headerText => {
+      ['Nombre', 'Puntos', 'Rol', 'FechaIngreso'].forEach(headerText => {
         let th = document.createElement('th');
         th.textContent = headerText;
         tr.appendChild(th);
@@ -323,7 +323,7 @@ if (window.location.pathname === '/leaderboard.html') {
       // Agregar una fila por cada empleado
       empleados.forEach(empleado => {
         let tr = document.createElement('tr');
-        ['NombreCompleto', 'Puntos'].forEach(field => {
+        ['nombreCompleto', 'Puntos', 'Rol', 'fecha'].forEach(field => {
           let td = document.createElement('td');
           td.textContent = empleado[field];
           tr.appendChild(td);
