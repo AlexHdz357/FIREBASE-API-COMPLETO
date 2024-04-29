@@ -3,7 +3,7 @@ let formulario = document.getElementById('formulario');
 
 if (formulario) {
   async function gemini(img64){
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=${process.env.GOOGLE_API_KEY}`
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=AIzaSyDS00vauZ81onTeqU_e6R9zVLl1Yx6mw9s`
     const data = `{
       "contents":[
         {
@@ -76,35 +76,35 @@ if (formulario) {
     const idEmpleado = document.getElementById('idEmpleado').value;
     const nombreProducto = document.getElementById('nombreProducto').value;
     const prioridad = document.getElementById('prioridad').value;
-    const Descripcion = document.getElementById('Descripcion').value;
+    const descripcion = document.getElementById('descripcion').value;
     const latitude = document.getElementById('latitude').value;
     const longitude = document.getElementById('longitude').value;
     const aprobado = 0;
     const completado = 0;
     const imagenTexto = document.getElementById('imagenTexto').value;
   
-    const data = { idEmpleado, nombreProducto, prioridad, Descripcion, latitude, longitude, aprobado, imagenTexto, completado};
+    const data = { idEmpleado, nombreProducto, prioridad, descripcion, latitude, longitude, aprobado, imagenTexto, completado};
     console.log('Sending data:', data);
     
-    const response = await fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-  
-    if (!response.ok) {
-      const message = `An error has occured: ${response.status}`;
-      throw new Error(message);
-    }
-  
-    const result = await response.json();
-    console.log(result);
-    console.log('Formulario enviado');
-  });
+    const response = await fetch('https://us-central1-tu-proyecto.cloudfunctions.net/api/reportes', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data),
+});
 
+if (!response.ok) {
+  throw new Error('Error al enviar el reporte');
 }
+
+if (response.status !== 204) {
+  const data = await response.json();
+  // Haz algo con los datos
+}
+
+alert('Reporte enviado con éxito');
+  });
 
 // Verificar si estamos en la página correcta
 if (window.location.pathname === '/reportes.html') {
@@ -132,7 +132,7 @@ if (window.location.pathname === '/reportes.html') {
 
       reportes.forEach(reporte => {
           let row = document.createElement('tr');
-          let descripcionCorta = reporte.Descripcion.substring(0, 20);
+          let descripcionCorta = reporte.descripcion.substring(0, 20);
           if (reporte.Descripcion.length > 20) {
               descripcionCorta += '...';
           }
@@ -188,7 +188,7 @@ if (idReporte) {
       }
       document.getElementById('nombreProducto').textContent = reporte.nombreProducto;
       document.getElementById('prioridad').textContent = reporte.prioridad;
-      document.getElementById('Descripcion').textContent = reporte.Descripcion;
+      document.getElementById('descripcion').textContent = reporte.descripcion;
       document.getElementById('latitude').textContent = reporte.latitude;
       document.getElementById('longitude').textContent = reporte.longitude;
       document.getElementById('aprobado').textContent = reporte.aprobado;
@@ -332,9 +332,4 @@ if (window.location.pathname === '/leaderboard.html') {
       leaderboardTable.appendChild(table);
     });
   }
-}
-
-
-
-
-   
+}}

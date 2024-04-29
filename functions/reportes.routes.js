@@ -1,6 +1,14 @@
 const {Router} = require("express");
 const admin = require("firebase-admin");
 const router = Router();
+const cors = require("cors");
+
+const corsOptions = {
+  origin: "https://fb-api-1fbee.web.app",
+  optionSuccessStatus: 200
+};
+
+router.use(cors(corsOptions));
 
 module.exports = router;
 
@@ -12,27 +20,26 @@ admin.initializeApp({
 const db = admin.firestore();
 
 router.post("/api/reportes", async (req, res) => {
-    try {
-      await db.collection("reportes")
-          .doc("/" + req.body.idReporte + "/")
-          .create({nombreProducto: req.body.nombreProducto,
-            idEmpleado: req.body.idEmpleado,
-            prioridad: req.body.prioridad,
-            descripcion: req.body.descripcion,
-            latitude: req.body.latitude,
-            longitude: req.body.longitude,
-            imagenTexto: req.body.imagenTexto,
-            aprobado: req.body.aprobado,
-            completado: req.body.completado,
-            fechaIngreso: new Date(),
-          });
-      return res.status(204).json();
-    } catch (error) {
-      console.log(error);
-      return res.status(500).send(error);
-    }
-  });
-  
+  try {
+    await db.collection("reportes")
+        .add({
+          nombreProducto: req.body.nombreProducto,
+          idEmpleado: req.body.idEmpleado,
+          prioridad: req.body.prioridad,
+          descripcion: req.body.descripcion,
+          latitude: req.body.latitude,
+          longitude: req.body.longitude,
+          imagenTexto: req.body.imagenTexto,
+          aprobado: req.body.aprobado || 0,
+          completado: req.body.completado || 0,
+          fechaIngreso: new Date(),
+        });
+    return res.status(204).json();
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send(error);
+  }
+});  
 router.get("/api/reportes/:idReporte", async (req, res) => {
     (async () => {
       try {
