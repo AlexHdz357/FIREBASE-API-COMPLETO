@@ -105,9 +105,10 @@ if (response.status !== 204) {
 
 alert('Reporte enviado con éxito');
   });
-
+}
 // Verificar si estamos en la página correcta
 if (window.location.pathname === '/reportes.html') {
+  console.log("Estas vivo codigo?");
   // Obtener y mostrar todos los reportes
   fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes')
   .then(response => response.json())
@@ -133,10 +134,10 @@ if (window.location.pathname === '/reportes.html') {
       reportes.forEach(reporte => {
           let row = document.createElement('tr');
           let descripcionCorta = reporte.descripcion.substring(0, 20);
-          if (reporte.Descripcion.length > 20) {
+          if (reporte.descripcion.length > 20) {
               descripcionCorta += '...';
           }
-          [reporte.idReporte, reporte.idEmpleado, reporte.nombreProducto, reporte.prioridad, descripcionCorta, reporte.latitude, reporte.longitude, reporte.aprobado, reporte.completado].forEach(text => {
+          [reporte.id, reporte.idEmpleado, reporte.nombreProducto, reporte.prioridad, descripcionCorta, reporte.latitude, reporte.longitude, reporte.aprobado, reporte.completado].forEach(text => {
               let td = document.createElement('td');
               td.textContent = text;
               row.appendChild(td);
@@ -151,7 +152,7 @@ if (window.location.pathname === '/reportes.html') {
       // Agregar un controlador de eventos al botón
       button.addEventListener('click', function() {
           // Redirigir al usuario a la vista del reporte específico
-          window.location.href = '/VistaReporte.html?idReporte=' + reporte.idReporte;
+          window.location.href = '/VistaReporte.html?idReporte=' + reporte.id;
       });
 
       buttonTd.appendChild(button);
@@ -162,6 +163,8 @@ if (window.location.pathname === '/reportes.html') {
       table.appendChild(tbody);
 
       // Agregar la tabla al DOM
+      console.log(table);
+      console.log(document.getElementById('reportes-table'));
       document.getElementById('reportes-table').appendChild(table);
   })
   .catch(error => console.error('Error:', error));
@@ -178,11 +181,11 @@ let idReporte = urlParams.get('idReporte');
 if (idReporte) {
   document.addEventListener('DOMContentLoaded', (event) => {
     // Hacer una solicitud GET a la API para obtener la información del reporte
-    fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes/' + idReporte)
+    fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes/' + id)
     .then(response => response.json())
     .then(reporte => {
       // Mostrar la información del reporte en la página
-      document.getElementById('idReporte').textContent = reporte.idReporte;
+      document.getElementById('id').textContent = reporte.id;
       if (reporte.idEmpleado) {
         document.getElementById('idEmpleado').textContent = reporte.idEmpleado;
       }
@@ -332,4 +335,4 @@ if (window.location.pathname === '/leaderboard.html') {
       leaderboardTable.appendChild(table);
     });
   }
-}}
+}
