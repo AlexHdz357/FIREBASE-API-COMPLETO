@@ -43,7 +43,7 @@ router.post("/api/reportes", async (req, res) => {
 router.get("/api/reportes/:idReporte", async (req, res) => {
     (async () => {
       try {
-        const doc = db.collection("reportes").doc(req.params.idReporte);
+        const doc = db.collection("reportes").doc(req.params.id);
         const item = await doc.get();
         const response = item.data();
         return res.status(200).json(response);
@@ -60,7 +60,7 @@ router.get("/api/reportes", async (req, res) => {
       const querySnapshot = await query.get();
       const docs = querySnapshot.docs;
       const response = docs.map((doc) => ({
-        idReporte: doc.idReporte,
+        id: doc.id,
         nombreProducto: doc.data().nombreProducto,
         idEmpleado: doc.data().idEmpleado,
         prioridad: doc.data().prioridad,
@@ -80,10 +80,10 @@ router.get("/api/reportes", async (req, res) => {
   
   
 router.put("/api/reportes/:idReporte", async (req, res) => {
-    const {idReporte} = req.params;
+    const {id} = req.params;
     const {aprobado, completado} = req.body;
     try {
-      const doc = db.collection("reportes").doc(idReporte);
+      const doc = db.collection("reportes").doc(id);
       const currentData = (await doc.get()).data() || {};
       const reporteActualizado = {
         ...currentData,
@@ -101,7 +101,7 @@ router.put("/api/reportes/:idReporte", async (req, res) => {
 router.post("/api/empleados", async (req, res) => {
   try {
     await db.collection("empleados")
-        .doc("/" + req.body.idEmpleado + "/")
+        .doc("/" + req.body.id + "/")
         .create({
           NombreCompleto: req.body.NombreCompleto,
           Rol: req.body.Rol,
