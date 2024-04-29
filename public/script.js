@@ -152,7 +152,7 @@ if (window.location.pathname === '/reportes.html') {
       // Agregar un controlador de eventos al botón
       button.addEventListener('click', function() {
           // Redirigir al usuario a la vista del reporte específico
-          window.location.href = '/VistaReporte.html?idReporte=' + reporte.id;
+          window.location.href = '/VistaReporte.html?id=' + reporte.id;
       });
 
       buttonTd.appendChild(button);
@@ -173,19 +173,19 @@ if (window.location.pathname === '/reportes.html') {
 
 // Obtener el ID del reporte de la URL
 let urlParams = new URLSearchParams(window.location.search);
-let idReporte = urlParams.get('idReporte');
-
-
+let id = urlParams.get('id');
+console.log(id + "Estas vivo id? parte 1") 
 
 // Verificar si el ID del reporte está presente
-if (idReporte) {
+if (id) {
+  console.log(id + "Estas vivo id? parte 2")
   document.addEventListener('DOMContentLoaded', (event) => {
     // Hacer una solicitud GET a la API para obtener la información del reporte
     fetch('https://us-central1-fb-api-1fbee.cloudfunctions.net/app/api/reportes/' + id)
     .then(response => response.json())
     .then(reporte => {
       // Mostrar la información del reporte en la página
-      document.getElementById('id').textContent = reporte.id;
+      document.getElementById('id').textContent = id;
       if (reporte.idEmpleado) {
         document.getElementById('idEmpleado').textContent = reporte.idEmpleado;
       }
